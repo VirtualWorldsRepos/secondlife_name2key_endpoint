@@ -10,7 +10,7 @@ if(getenv('DB_HOST') != FALSE)
     // name / request / key / [reply_format ~ optional supports json,csv anything else will be taken as print_r]
 
     // build
-        // {full|update}
+        // full
     // name2key
         // avatar name
     // key2name
@@ -19,7 +19,7 @@ if(getenv('DB_HOST') != FALSE)
     if(getenv('API_KEYS') != FALSE)
     {
         $vaild_keys = explode(",",getenv('API_KEYS'));
-        if($vaild_keys[0] != "SETUP")
+        if($vaild_keys[0] != "setup")
         {
             $api_name = "none";
             $api_request = "";

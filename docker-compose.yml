@@ -5,7 +5,9 @@ services:
         restart: always
         image: madpeter/secondlife_name2key_endpoint:latest
         expose:
-            - 5151:80
+            - 80:80
+        ports:
+            - 80:80
         links:
             - name2key_mysqli
         environment:
@@ -25,4 +27,4 @@ services:
             MYSQL_PASSWORD: '{MySQLDBPW}'
             MYSQL_DATABASE: 'name2keydb'
         volumes:
-            - name2key-db:/var/lib/mysql
+            - name2key-db:/var/lib/mysql_name2keydb

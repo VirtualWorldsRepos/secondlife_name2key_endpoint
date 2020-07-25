@@ -1,9 +1,10 @@
 <?php
 define("require_id_on_load",true);
+$db_objects_load_path = "framework/db_objects/";
 require_once("framework/db_objects/loader.php"); // db_objects
 $framework_loading = array("url_loading","autoloader");
 foreach($framework_loading as $framework) { require_once("framework/".$framework.".php"); }
-require_once("framework/mysqli/loader.php"); // sql_driver
+
 
 class db extends error_logging
 {
@@ -18,6 +19,6 @@ class db extends error_logging
         $this->dbPass = getenv('DB_PASSWORD');
     }
 }
-
+require_once("framework/mysqli/loader.php"); // sql_driver
 $sql = new mysqli_controler();
 ?>

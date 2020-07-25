@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS `group1`;
+DROP TABLE IF EXISTS `group2`;
+DROP TABLE IF EXISTS `group3`;
+DROP TABLE IF EXISTS `groupother`;
 CREATE TABLE `group1` (
   `id` int(11) NOT NULL,
   `uuid` varchar(36) NOT NULL,

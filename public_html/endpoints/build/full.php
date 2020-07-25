@@ -2,31 +2,29 @@
 set_time_limit (120);
 if(defined("entrypoint") == true)
 {
-    file_put_contents("name2key.csv.zip", fopen("http://w-hat.com/name2key.csv.zip", 'r'));
-    $zip = new ZipArchive;
-    $res = $zip->open("name2key.csv.zip");
-    if ($res === TRUE)
-    {
-        unlink("name2key.csv");
-        $zip->extractTo('/');
-        $zip->close();
-        unlink("name2key.csv.zip");
+    $sql_obj->RawSQL("../required/db_layout/installdb.sql");
 
-        if(isset(getenv('INSTALL_OK')) != FALSE)
-        {
-            $sql_obj->RawSQL("framework/db_layout/cleardb.sql");
-        }
-        else
-        {
-            $sql_obj->RawSQL("framework/db_layout/installdb.sql");
-        }
-        $groupa = array("a","s","c","b","g","n","q","v","y");
-        $groupb = array("m","k","j","d","h","o","t","w","z");
-        $groupc = array("e","l","r","f","i","p","u","x");
-        $handle = fopen("name2key.csv", "r");
+    $groupa = array("a","s","c","b","g","n","q","v","y");
+    $groupb = array("m","k","j","d","h","o","t","w","z");
+    $groupc = array("e","l","r","f","i","p","u","x");
+    if(file_exists("../required/csv_dataset/name2key.csv") == true)
+    {
+        unlink("../required/csv_dataset/name2key.csv");
+    }
+    if(file_exists("../required/csv_dataset/name2key.csv.zip") == true)
+    {
+        unlink("../required/csv_dataset/name2key.csv.zip");
+    }
+    file_put_contents("../required/csv_dataset/name2key.csv.zip", fopen("http://w-hat.com/name2key.csv.zip","r"));
+    if(file_exists("../required/csv_dataset/name2key.csv.zip") == true)
+    {
+        $zip = new ZipArchive;
+        $res = $zip->open("../required/csv_dataset/name2key.csv.zip");
+        $zip->extractTo("../required/csv_dataset");
+        $zip->close();
+        $handle = fopen("../required/csv_dataset/name2key.csv", "r");
         if ($handle)
         {
-            echo "Building name2key DB from CSV file<br/>";
             while (($line = fgets($handle)) !== false)
             {
                 //00000000-0000-0000-0000-000000000001,Fake01 Resident
@@ -57,12 +55,12 @@ if(defined("entrypoint") == true)
         }
         else
         {
-            $reply = array("status"=>false,"message"=>"File missing?");
+            $reply = array("status"=>true,"message"=>"local CSV file missing");
         }
     }
     else
     {
-        $reply = array("status"=>false,"message"=>"Extract failed");
+        $reply = array("status"=>true,"message"=>"local zip file missing");
     }
 }
 else
