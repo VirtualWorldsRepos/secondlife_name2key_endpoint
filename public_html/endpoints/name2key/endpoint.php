@@ -8,6 +8,7 @@ if(defined("entrypoint") == true)
 
     if(strlen($api_request) >= 3)
     {
+        $api_request = str_replace("%20"," ",$api_request);
         $bits = explode(" ",$api_request);
         $warn_no_lastname = "";
         if(count($bits) == 1)
@@ -32,7 +33,7 @@ if(defined("entrypoint") == true)
         $whereconfig = array(
                 "fields" => array("name"),
                 "values" => array($api_request),
-                "matches" => array("%LIKE%"),
+                "matches" => array("% LIKE %"),
                 "types" => array("s")
         );
         $obj->load_with_config($whereconfig);

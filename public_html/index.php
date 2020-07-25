@@ -29,7 +29,7 @@ if(getenv('DB_HOST') != FALSE)
 
             if(in_array($api_key,$vaild_keys) == true)
             {
-                $known_api = array("build","name2key","key2name");
+                $known_api = array("build","name2key","key2name","required");
                 if(in_array($api_name,$known_api) == true)
                 {
                     include("endpoints/".$api_name."/endpoint.php");
