@@ -9,11 +9,13 @@ function output($str) {
 set_time_limit (240);
 if(defined("entrypoint") == true)
 {
+    output("emptying db");
     $sql->RawSQL("../required/db_layout/installdb.sql");
 
     $groupa = array("a","s","c","b","g","n","q","v","y");
     $groupb = array("m","k","j","d","h","o","t","w","z");
     $groupc = array("e","l","r","f","i","p","u","x");
+    output("cleaning up");
     if(file_exists("../required/csv_dataset/tmp/name2key.csv") == true)
     {
         unlink("../required/csv_dataset/tmp/name2key.csv");
@@ -22,9 +24,11 @@ if(defined("entrypoint") == true)
     {
         unlink("../required/csv_dataset/name2key.csv.zip");
     }
+    output("downloading name2key csv");
     file_put_contents("../required/csv_dataset/name2key.csv.zip", fopen("http://w-hat.com/name2key.csv.zip","r"));
     if(file_exists("../required/csv_dataset/name2key.csv.zip") == true)
     {
+        output("unpacking");
         $zip = new ZipArchive;
         $res = $zip->open("../required/csv_dataset/name2key.csv.zip");
         $zip->extractTo("../required/csv_dataset");
@@ -33,6 +37,7 @@ if(defined("entrypoint") == true)
         if ($handle)
         {
             $counter = 0;
+            $twitcher = 0;
             while (($line = fgets($handle)) !== false)
             {
                 set_time_limit (30);
@@ -59,13 +64,19 @@ if(defined("entrypoint") == true)
                     $obj->create_entry();
                 }
                 $counter++;
-                if(($counter%5) == 1)
+                if(($counter%30) == 1)
                 {
                     output("Working on step: ".$counter.", ");
                 }
-                if(($counter%30) == 1)
+                if(($counter%90) == 1)
                 {
                     output("<br/> ");
+                    $twitcher++;
+                }
+                if($twitcher == 5)
+                {
+                    $twitcher = 0;
+                    output("<script type=\"text/javascript\">document.body.innerHTML = '';</script>");
                 }
             }
             fclose($handle);
