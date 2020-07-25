@@ -5,7 +5,17 @@ require_once("framework/db_objects/loader.php"); // db_objects
 $framework_loading = array("url_loading","autoloader");
 foreach($framework_loading as $framework) { require_once("framework/".$framework.".php"); }
 
-if(class_exists("db")  == false)
+if(defined("magic") == true)
+{
+    class db extends error_logging
+    {
+        protected $dbHost = "localhost";
+        protected $dbName = "name2keydb";
+        protected $dbUser = "root";
+        protected $dbPass = "";
+    }
+}
+else if(getenv('DB_HOST') != FALSE)
 {
     class db extends error_logging
     {
@@ -19,16 +29,6 @@ if(class_exists("db")  == false)
             $this->dbUser = getenv('DB_USERNAME');
             $this->dbPass = getenv('DB_PASSWORD');
         }
-    }
-}
-else if(defined("magic") == true)
-{
-    class db extends error_logging
-    {
-        protected $dbHost = "localhost";
-        protected $dbName = "name2keydb";
-        protected $dbUser = "root";
-        protected $dbPass = "";
     }
 }
 else
