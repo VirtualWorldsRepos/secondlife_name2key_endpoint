@@ -14,7 +14,7 @@ ini_set('memory_limit', '4095M');
 if(defined("entrypoint") == true)
 {
     output("emptying db<br/>");
-    output(print_r($sql->RawSQL("../required/db_layout/installdb.sql"),true));
+    output(print_r($sql->RawSQL("framework/db_layout/installdb.sql"),true));
     output("<br/>");
     output("cleaning up<br/>");
     $all_ok = true;

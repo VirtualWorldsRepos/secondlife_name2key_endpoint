@@ -4,7 +4,6 @@ $db_objects_load_path = "framework/db_objects/";
 require_once("framework/db_objects/loader.php"); // db_objects
 $framework_loading = array("url_loading","autoloader");
 foreach($framework_loading as $framework) { require_once("framework/".$framework.".php"); }
-
 if(defined("magic") == true)
 {
     class db extends error_logging
