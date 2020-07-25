@@ -3,11 +3,7 @@ if(defined("entrypoint") == true)
 {
     if($api_key == $vaild_keys[0])
     {
-        if($api_request == "full")
-        {
-            include("endpoints/build/full.php");
-        }
-        else if($api_request == "rebuild")
+        if($api_request == "rebuild")
         {
             include("endpoints/build/rebuild.php");
         }

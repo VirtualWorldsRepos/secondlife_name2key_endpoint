@@ -1,4 +1,5 @@
 <?php
+// used to test the build endpoint without being in docker ^+^
 set_time_limit (10);
 ob_start();
 if(getenv('DB_HOST') == FALSE)
@@ -7,7 +8,7 @@ if(getenv('DB_HOST') == FALSE)
     define("magic","yes");
     define("entrypoint","yes");
     $api_name = "build";
-    $api_request = "full";
+    $api_request = "rebuild";
     $api_key = "magic";
     $vaild_keys = array("magic");
     include("framework/core.php");

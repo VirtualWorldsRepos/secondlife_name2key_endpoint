@@ -10,9 +10,11 @@ if(getenv('DB_HOST') != FALSE)
     // name / request / key / [reply_format ~ optional supports json,csv anything else will be taken as print_r]
 
     // build
-        // full
+        // rebuild
+        // update
     // name2key
         // avatar name
+
     // key2name
         /// avatar uuid
 
@@ -29,7 +31,7 @@ if(getenv('DB_HOST') != FALSE)
 
             if(in_array($api_key,$vaild_keys) == true)
             {
-                $known_api = array("build","name2key","key2name","required");
+                $known_api = array("build","name2key","key2name");
                 if(in_array($api_name,$known_api) == true)
                 {
                     include("endpoints/".$api_name."/endpoint.php");

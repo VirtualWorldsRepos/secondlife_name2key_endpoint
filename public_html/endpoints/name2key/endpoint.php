@@ -2,10 +2,9 @@
 if(defined("entrypoint") == true)
 {
     // $api_request   "Madpeter Zond"
-    $groupa = array("a","s","c","b","g","n","q","v","y");
-    $groupb = array("m","k","j","d","h","o","t","w","z");
-    $groupc = array("e","l","r","f","i","p","u","x");
-
+    $group_options = array("a","b","c","d","e","f","g","h","i","j","k",
+    "l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+    "1","2","3","4","5","6","7","8","9","0");
     if(strlen($api_request) >= 3)
     {
         $api_request = str_replace("%20"," ",$api_request);
@@ -17,23 +16,17 @@ if(defined("entrypoint") == true)
             $api_request .= " Resident";
         }
         $firstbit = strtolower($api_request[0]);
-        $objset = new groupother_set();
-        if(in_array($firstbit,$groupa) == true)
+        $use_object_class = "group_other";
+        if(in_array($firstbit,$group_options) == true)
         {
-            $objset = new group1_set();
+            $use_object_class = "group_".$firstbit."";
         }
-        else if(in_array($firstbit,$groupb) == true)
-        {
-            $obj = new group2_set();
-        }
-        else if(in_array($firstbit,$groupc) == true)
-        {
-            $obj = new group3_set();
-        }
+        $obj = new $$use_object_class();
+
         $whereconfig = array(
                 "fields" => array("name"),
                 "values" => array($api_request),
-                "matches" => array("% LIKE %"),
+                "matches" => array("LIKE %"),
                 "types" => array("s")
         );
         $obj->load_with_config($whereconfig);

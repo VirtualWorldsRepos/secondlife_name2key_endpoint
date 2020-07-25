@@ -3,12 +3,14 @@ if(defined("entrypoint") == true)
 {
     if(strlen($api_request) == 36)
     {
-        $testing_with = array("group1","group2","group3","groupother");
+        $group_options = array("a","s","m","c","d","l","j","b","k","t","r","p","e","n","g","f","h","v","i","w",
+        "o","z","x","y","u","q","1","0","2","3","4","6","7","5","8","9","other");
         $found = false;
         $found_obj = null;
-        foreach($testing_with as $classname)
+        foreach($group_options as $classname)
         {
-            $obj = new $$classname();
+            $class_name = "group_".$classname."";
+            $obj = new $$class_name();
             if($obj->load_by_field("uuid",$api_request) == true)
             {
                 $found = true;
