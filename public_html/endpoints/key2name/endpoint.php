@@ -10,7 +10,7 @@ if(defined("entrypoint") == true)
         foreach($group_options as $classname)
         {
             $class_name = "group_".$classname."";
-            $obj = new $$class_name();
+            $obj = new $class_name();
             if($obj->load_by_field("uuid",$api_request) == true)
             {
                 $found = true;

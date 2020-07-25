@@ -16,12 +16,12 @@ if(defined("entrypoint") == true)
             $api_request .= " Resident";
         }
         $firstbit = strtolower($api_request[0]);
-        $use_object_class = "group_other";
+        $use_object_class = "group_other_set";
         if(in_array($firstbit,$group_options) == true)
         {
-            $use_object_class = "group_".$firstbit."";
+            $use_object_class = "group_".$firstbit."_set";
         }
-        $obj = new $$use_object_class();
+        $obj = new $use_object_class();
 
         $whereconfig = array(
                 "fields" => array("name"),
@@ -52,7 +52,7 @@ if(defined("entrypoint") == true)
                     "name"=>"",
                     "uuid"=>"",
                     "lookingfor"=>$api_request,
-                    "message"=>"Multiple results found please try again with MORE DETAIL". $warn_no_lastname
+                    "message"=>"".$obj->get_count()." results"
                 );
             }
         }
