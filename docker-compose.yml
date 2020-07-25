@@ -27,4 +27,4 @@ services:
             MYSQL_PASSWORD: '{MySQLDBPW}'
             MYSQL_DATABASE: 'name2keydb'
         volumes:
-            - name2key-db:/var/lib/mysql_name2keydb
+            - name2key-db:/var/lib/mysql
