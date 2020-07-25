@@ -82,7 +82,7 @@ if(defined("entrypoint") == true)
             {
                 set_time_limit (30);
                 //00000000-0000-0000-0000-000000000001,Fake01 Resident
-
+                $line = trim($line);
                 $bits = explode(",",$line);
                 if(count($bits) == 2)
                 {
