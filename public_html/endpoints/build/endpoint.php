@@ -7,6 +7,10 @@ if(defined("entrypoint") == true)
         {
             include("endpoints/build/full.php");
         }
+        else if($api_request == "rebuild")
+        {
+            include("endpoints/build/rebuild.php");
+        }
         else
         {
             $reply = array("status" => false,"message"=>"request not supported");
