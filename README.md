@@ -64,7 +64,7 @@ services:
 {"status":false,"message":"in setup mode"}
 ```
 
- - Step 6: Edit ENV value "API_KEYS"
+ - Step 6: Edit ENV value "API_KEYS" for the endpoint container "name2key_endpoint" and redeploy
 ```
 this is a CSV of keys used to make requests to this service
 example: "magic,popcorn"
