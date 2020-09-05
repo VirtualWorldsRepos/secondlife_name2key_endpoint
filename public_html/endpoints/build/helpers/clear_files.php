@@ -18,5 +18,4 @@ if(file_exists("../required/csv_dataset/name2key.csv.zip") == true)
 {
     unlink("../required/csv_dataset/name2key.csv.zip");
 }
-include("endpoints/build/full.php");
 ?>
