@@ -6,8 +6,34 @@ if($need_sql_build == true)
     $skip_lines = 0;
     $repeat = TRUE;
     output("There are about 10000000 entrys this will take awhile!<br/>");
+    foreach($group_options as $option)
+    {
+        $group_data[$option] = array(
+            "pairs" => array(),
+            "sql" => "",
+            "open" => 0,
+            "next_id" => 1,
+            "table" => "group_".$option."",
+            "addon" => "",
+        );
+    }
+    $group_data["other"] = array(
+        "sql" => "",
+        "pairs" => array(),
+        "open" => 0,
+        "next_id" => 1,
+        "table" => "group_other",
+        "addon" => "",
+    );
     while($repeat == TRUE)
     {
+        foreach(array_keys($group_data) as $option)
+        {
+            $group_data[$option]["pairs"] = array();
+            $group_data[$option]["sql"] = "";
+            $group_data[$option]["open"] = 0;
+            $group_data[$option]["addon"] = "";
+        }
         $subgroup++;
         $repeat = FALSE;
         $handle = fopen("../required/csv_dataset/tmp/name2key.csv", "r");
@@ -17,25 +43,6 @@ if($need_sql_build == true)
             $twitcher = 0;
             $clicker = 0;
             $group_data = array();
-            foreach($group_options as $option)
-            {
-                $group_data[$option] = array(
-                    "pairs" => array(),
-                    "sql" => "",
-                    "open" => 0,
-                    "next_id" => 1,
-                    "table" => "group_".$option."",
-                    "addon" => "",
-                );
-            }
-            $group_data["other"] = array(
-                "sql" => "",
-                "pairs" => array(),
-                "open" => 0,
-                "next_id" => 1,
-                "table" => "group_other",
-                "addon" => "",
-            );
             $exit = FALSE;
             $twitch = 0;
             $linenum = 0;
