@@ -9,12 +9,14 @@ if(defined("entrypoint") == true)
     include("endpoints/build/helpers/cleanup.php");
     include("endpoints/build/helpers/download.php");
     include("endpoints/build/helpers/buildsql.php");
-    output('<br/><a href="build/import/'.$api_key.'?page=0" target="_blank">Group 0</a><br/>');
-    output('<a href="build/import/'.$api_key.'?page=1" target="_blank">Group 1</a><br/>');
-    output('<a href="build/import/'.$api_key.'?page=2" target="_blank">Group 2</a><br/>');
-    output('<a href="build/import/'.$api_key.'?page=3" target="_blank">Group 3</a><br/>');
-    output('<a href="build/import/'.$api_key.'?page=4" target="_blank">Group 4</a><br/>');
-    output('<a href="build/import/'.$api_key.'?page=4" target="_blank">Group 5</a><br/>');
+    $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+    $bits = array_values(array_diff(explode("/",$uri_parts[0]),array("")));
+    output('<br/><a href="'.$bits[0].'/build/import/'.$api_key.'?page=0" target="_blank">Group 0</a><br/>');
+    output('<a href="'.$bits[0].'/build/import/'.$api_key.'?page=1" target="_blank">Group 1</a><br/>');
+    output('<a href="'.$bits[0].'/build/import/'.$api_key.'?page=2" target="_blank">Group 2</a><br/>');
+    output('<a href="'.$bits[0].'/build/import/'.$api_key.'?page=3" target="_blank">Group 3</a><br/>');
+    output('<a href="'.$bits[0].'/build/import/'.$api_key.'?page=4" target="_blank">Group 4</a><br/>');
+    output('<a href="'.$bits[0].'/build/import/'.$api_key.'?page=4" target="_blank">Group 5</a><br/>');
     $reply = array("status"=>true,"message"=>'<br/>Please import final dataset one by one!');
 }
 else

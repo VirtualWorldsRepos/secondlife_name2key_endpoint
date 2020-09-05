@@ -20,7 +20,7 @@ if(isset($_GET["page"]) == true)
             }
         }
         sleep(1);
-        output("<script type=\"text/javascript\">document.body.innerHTML = '';</script>");
+        output("<br/>Saving now please wait");
     }
 }
 ?>

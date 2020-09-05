@@ -45,7 +45,11 @@ if(defined("entrypoint") == true)
         {
             $reply = array("status" => false,"message"=>"request not supported");
         }
-        output(print_r($sql->sqlSave(),true));
+        $status = $sql->sqlSave();
+        $message = "";
+        if($status == true) $message = "ok";
+        else $message = "Failed:".$sql->get_last_error();
+        $reply = array("status"=>$status,"message"=>$message);
     }
     else
     {
