@@ -5,11 +5,15 @@ if(defined("entrypoint") == true)
     $need_unzip = false;
     $need_download = false;
     $need_sql_build = false;
+    $group_options = array("a","b","c","d","e","f","g","h","i","j","k",
+    "l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+    "1","2","3","4","5","6","7","8","9","0");
     if($api_key == $vaild_keys[0])
     {
         if($api_request == "buildsql")
         {
             $need_sql_build = true;
+            include("endpoints/build/helpers/clear_sql_files.php");
             include("endpoints/build/helpers/buildsql.php");
         }
         else if($api_request == "download")
@@ -18,6 +22,7 @@ if(defined("entrypoint") == true)
         }
         else if($api_request == "clearfiles")
         {
+            include("endpoints/build/helpers/clear_sql_files.php");
             include("endpoints/build/helpers/clear_files.php");
         }
         else if($api_request == "import")
