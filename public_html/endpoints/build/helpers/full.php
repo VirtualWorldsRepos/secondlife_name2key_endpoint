@@ -16,8 +16,16 @@ if(defined("entrypoint") == true)
     include("endpoints/build/helpers/cleanup.php");
     include("endpoints/build/helpers/download.php");
     include("endpoints/build/helpers/buildsql.php");
-    include("endpoints/build/helpers/import.php");
-    $reply = array("status"=>true,"message"=>"all done");
+    $reply = array("status"=>true,"message"=>'all done please now<br/>
+    import the data by clicking on each of these links<br/>
+    one by one after they say Done<br/>
+    <a href="build/import/'.$api_key.'?page=0" target="_blank">Group 0</a><br/>
+    <a href="build/import/'.$api_key.'?page=1" target="_blank">Group 1</a><br/>
+    <a href="build/import/'.$api_key.'?page=2" target="_blank">Group 2</a><br/>
+    <a href="build/import/'.$api_key.'?page=3" target="_blank">Group 3</a><br/>
+    <a href="build/import/'.$api_key.'?page=4" target="_blank">Group 4</a><br/>
+    <a href="build/import/'.$api_key.'?page=5" target="_blank">Group 5</a><br/>
+    ');
 }
 else
 {

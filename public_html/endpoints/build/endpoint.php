@@ -38,6 +38,7 @@ if(defined("entrypoint") == true)
         {
             $reply = array("status" => false,"message"=>"request not supported");
         }
+        output(print_r($sql->sqlSave(),true));
     }
     else
     {
