@@ -38,32 +38,38 @@ if($need_sql_build == true)
             );
             $exit = FALSE;
             $twitch = 0;
+            $linenum = 0;
             while ((($line = fgets($handle)) !== false) && ($exit == false))
             {
                 set_time_limit (30);
-                //00000000-0000-0000-0000-000000000001,Fake01 Resident
-                $line = trim($line);
-                $bits = explode(",",$line);
-                if(count($bits) == 2)
+                $linenum++;
+                if($linenum >= $skip_lines)
                 {
-                    $firstbit = strtolower(($bits[1])[0]);
-                    $use_group = "other";
-                    if(in_array($firstbit,$group_options) == true)
+                    //00000000-0000-0000-0000-000000000001,Fake01 Resident
+                    $line = trim($line);
+                    $bits = explode(",",$line);
+                    if(count($bits) == 2)
                     {
-                        $use_group = $firstbit;
+                        $firstbit = strtolower(($bits[1])[0]);
+                        $use_group = "other";
+                        if(in_array($firstbit,$group_options) == true)
+                        {
+                            $use_group = $firstbit;
+                        }
+                        $group_data[$use_group]["pairs"][$bits[0]] = $bits[1];
                     }
-                    $group_data[$use_group]["pairs"][$bits[0]] = $bits[1];
-                }
-                $counter++;
-                if(($counter%5000) == 1)
-                {
-                    output("<script type=\"text/javascript\">document.body.innerHTML = '';</script>");
-                    output("Sorting: Working on step: ".$counter." of about 1600000");
-                    $twitch++;
-                }
-                if($twitch == 50)
-                {
-                    $exit = true;
+                    $counter++;
+                    if(($counter%5000) == 1)
+                    {
+                        output("<script type=\"text/javascript\">document.body.innerHTML = '';</script>");
+                        output("Sorting: Working on step: ".$linenum." of about 1600000");
+                        $twitch++;
+                    }
+                    if($twitch == 50)
+                    {
+                        $skip_lines = $linenum;
+                        $exit = true;
+                    }
                 }
             }
             fclose($handle);
