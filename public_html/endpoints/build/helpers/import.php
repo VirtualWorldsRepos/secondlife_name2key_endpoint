@@ -1,8 +1,8 @@
 <?php
 $subgroups = 0;
-while($subgroups <= 1000)
+while($subgroups <= 20)
 {
-    output("importing datasets<br/>");
+    output("importing datasets ".$subgroups."/20<br/>");
     $group_options[] = "other";
     foreach($group_options as $option)
     {

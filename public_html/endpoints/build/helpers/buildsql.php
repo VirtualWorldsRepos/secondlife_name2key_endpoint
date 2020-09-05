@@ -5,7 +5,7 @@ if($need_sql_build == true)
 
     $skip_lines = 0;
     $repeat = TRUE;
-    output("There are about 1600000 entrys this will take awhile!<br/>");
+    output("There are about 10000000 entrys this will take awhile!<br/>");
     while($repeat == TRUE)
     {
         $subgroup++;
@@ -62,7 +62,7 @@ if($need_sql_build == true)
                     if(($counter%5000) == 1)
                     {
                         output("<script type=\"text/javascript\">document.body.innerHTML = '';</script>");
-                        output("Sorting: Working on step: ".$linenum." of about 1600000");
+                        output("Sorting: Working on step: ".$linenum." of about 10000000");
                         $twitch++;
                     }
                     if($twitch == 400)
@@ -74,7 +74,7 @@ if($need_sql_build == true)
             }
             fclose($handle);
             output("<script type=\"text/javascript\">document.body.innerHTML = '';</script>");
-            output("Sorting: Working on step: ".$linenum." of about 1600000");
+            output("Sorting: Working on step: ".$linenum." of about 10000000");
             sleep(2);
             if($exit == true)
             {
