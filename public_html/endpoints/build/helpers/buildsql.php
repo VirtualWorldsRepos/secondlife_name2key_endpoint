@@ -1,4 +1,6 @@
 <?php
+set_time_limit (240);
+ini_set('memory_limit', '8095M');
 if($need_sql_build == true)
 {
     $subgroup = -1;
