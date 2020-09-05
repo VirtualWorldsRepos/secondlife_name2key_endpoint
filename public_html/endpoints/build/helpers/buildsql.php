@@ -65,7 +65,7 @@ if($need_sql_build == true)
                         output("Sorting: Working on step: ".$linenum." of about 1600000");
                         $twitch++;
                     }
-                    if($twitch == 50)
+                    if($twitch == 200)
                     {
                         $skip_lines = $linenum;
                         $exit = true;
@@ -74,7 +74,7 @@ if($need_sql_build == true)
             }
             fclose($handle);
             output("<script type=\"text/javascript\">document.body.innerHTML = '';</script>");
-            output("Sorting: Working on step: ".$counter." of about 1600000");
+            output("Sorting: Working on step: ".$linenum." of about 1600000");
             sleep(2);
             if($exit == true)
             {
