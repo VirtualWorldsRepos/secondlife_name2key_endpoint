@@ -39,7 +39,6 @@ if($need_sql_build == true)
             $counter = 0;
             $twitcher = 0;
             $clicker = 0;
-            $group_data = array();
             $exit = FALSE;
             $twitch = 0;
             $linenum = 0;
