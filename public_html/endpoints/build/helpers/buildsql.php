@@ -6,6 +6,7 @@ if($need_sql_build == true)
     $skip_lines = 0;
     $repeat = TRUE;
     output("There are about 10000000 entrys this will take awhile!<br/>");
+    $group_data = array();
     foreach($group_options as $option)
     {
         $group_data[$option] = array(
@@ -27,7 +28,7 @@ if($need_sql_build == true)
     );
     while($repeat == TRUE)
     {
-        foreach(array_keys($group_data) as $option)
+        foreach($group_options as $option)
         {
             $group_data[$option]["pairs"] = array();
             $group_data[$option]["sql"] = "";
