@@ -15,9 +15,9 @@ while($subgroups <= 5)
             output(" DONE <br/>");
         }
     }
+    output(print_r($sql->sqlSave(false),true));
     sleep(1);
     output("<script type=\"text/javascript\">document.body.innerHTML = '';</script>");
     $subgroups++;
 }
-output(print_r($sql->sqlSave(),true));
 ?>
