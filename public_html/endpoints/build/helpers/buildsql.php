@@ -61,7 +61,7 @@ if($need_sql_build == true)
                     output("Sorting: Working on step: ".$counter." of about 1600000");
                     $twitch++;
                 }
-                if($twitch == 15)
+                if($twitch == 50)
                 {
                     $exit = true;
                 }
@@ -73,7 +73,7 @@ if($need_sql_build == true)
             if($exit == true)
             {
                 $repeat = true;
-                output("Splitting load due to memory issues [Group: ".$subgroup."]");
+                output("<br/>Splitting load due to memory issues [Group: ".$subgroup."]");
                 sleep(2);
             }
             foreach(array_keys($group_data) as $key)
