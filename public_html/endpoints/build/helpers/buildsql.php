@@ -31,18 +31,6 @@ if($need_sql_build == true)
     );
     while($repeat == TRUE)
     {
-        foreach(array_keys($group_data) as $key)
-        {
-            $new_cfg = array(
-                "pairs" => array(),
-                "sql" => "",
-                "open" => 0,
-                "next_id" => $group_data[$key]["next_id"],
-                "table" => "group_".$key."",
-                "addon" => "",
-            );
-            $group_data[$key] = $new_cfg;
-        }
         $subgroup++;
         $repeat = FALSE;
         $handle = fopen("../required/csv_dataset/tmp/name2key.csv", "r");
@@ -133,7 +121,9 @@ if($need_sql_build == true)
                     }
                     file_put_contents($file,$group_data[$key]["sql"]);
                     // free up mem
+                    $group_data[$key]["open"] = 0;
                     $group_data[$key]["sql"] = "";
+                    $group_data[$key]["addon"] = "";
                     $group_data[$key]["pairs"] = array();
                 }
             }
