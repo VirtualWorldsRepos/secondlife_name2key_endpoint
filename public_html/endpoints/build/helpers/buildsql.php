@@ -65,7 +65,7 @@ if($need_sql_build == true)
                         output("Sorting: Working on step: ".$linenum." of about 1600000");
                         $twitch++;
                     }
-                    if($twitch == 200)
+                    if($twitch == 400)
                     {
                         $skip_lines = $linenum;
                         $exit = true;
@@ -85,36 +85,39 @@ if($need_sql_build == true)
             foreach(array_keys($group_data) as $key)
             {
                 set_time_limit (30);
-                foreach($group_data[$key]["pairs"] as $uuid => $name)
+                if(count($group_data[$key]["pairs"]) > 0)
                 {
-                    if($group_data[$key]["open"] == 0)
+                    foreach($group_data[$key]["pairs"] as $uuid => $name)
                     {
-                        $group_data[$key]["open"] = 1;
-                        $group_data[$key]["sql"] .= " INSERT INTO `".$group_data[$key]["table"]."` (`id`,`uuid`, `name`) VALUES \n\r";
+                        if($group_data[$key]["open"] == 0)
+                        {
+                            $group_data[$key]["open"] = 1;
+                            $group_data[$key]["sql"] .= " INSERT INTO `".$group_data[$key]["table"]."` (`id`,`uuid`, `name`) VALUES \n\r";
+                        }
+                        $group_data[$key]["sql"] .= $group_data[$key]["addon"];
+                        $group_data[$key]["addon"] = " , \n\r";
+                        $group_data[$key]["sql"] .= " (".$group_data[$key]["next_id"].",\"".$uuid."\",\"".$name."\") ";
+                        $group_data[$key]["next_id"] = $group_data[$key]["next_id"] + 1;
+                        if(($group_data[$key]["next_id"]%400)==0)
+                        {
+                            $group_data[$key]["open"] = 0;
+                            $group_data[$key]["addon"] = "";
+                            $group_data[$key]["sql"] .= ";\n\r";
+                        }
                     }
-                    $group_data[$key]["sql"] .= $group_data[$key]["addon"];
-                    $group_data[$key]["addon"] = " , \n\r";
-                    $group_data[$key]["sql"] .= " (".$group_data[$key]["next_id"].",\"".$uuid."\",\"".$name."\") ";
-                    $group_data[$key]["next_id"] = $group_data[$key]["next_id"] + 1;
-                    if(($group_data[$key]["next_id"]%400)==0)
+                    if($group_data[$key]["open"] == 1)
                     {
-                        $group_data[$key]["open"] = 0;
-                        $group_data[$key]["addon"] = "";
                         $group_data[$key]["sql"] .= ";\n\r";
                     }
+                    $group_data[$key]["pairs"] = array();
+                    echo "Group ".$key."/".$subgroup." has ".($group_data[$key]["next_id"]-1)." entrys<br/>";
+                    $file = "../required/sql_dataset/".$subgroup."_group_".$key.".sql";
+                    if(file_exists($file) == true)
+                    {
+                        unlink($file);
+                    }
+                    file_put_contents($file,$group_data[$key]["sql"]);
                 }
-                if($group_data[$key]["open"] == 1)
-                {
-                    $group_data[$key]["sql"] .= ";\n\r";
-                }
-                $group_data[$key]["pairs"] = array();
-                echo "Group ".$key."/".$subgroup." has ".($group_data[$key]["next_id"]-1)." entrys<br/>";
-                $file = "../required/sql_dataset/".$subgroup."_group_".$key.".sql";
-                if(file_exists($file) == true)
-                {
-                    unlink($file);
-                }
-                file_put_contents($file,$group_data[$key]["sql"]);
                 unset($group_data[$key]);
             }
         }

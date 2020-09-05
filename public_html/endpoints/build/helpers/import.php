@@ -11,11 +11,13 @@ while($subgroups <= 1000)
         if(file_exists($import_file) == true)
         {
             output("group ".$option."/".$subgroups." -");
-            output(print_r($sql->RawSQL("../required/sql_dataset/".$subgroups."_group_".$option.".sql"),true));
+            output(print_r($sql->RawSQL($import_file),true));
             output(" DONE <br/>");
         }
     }
-    output(print_r($sql->sqlSave(),true));
+    sleep(1);
+    output("<script type=\"text/javascript\">document.body.innerHTML = '';</script>");
     $subgroups++;
 }
+output(print_r($sql->sqlSave(),true));
 ?>
