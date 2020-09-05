@@ -7,6 +7,9 @@ if($need_sql_build == true)
     $repeat = TRUE;
     output("There are about 10000000 entrys this will take awhile!<br/>");
     $group_data = array();
+    $group_options = array("a","b","c","d","e","f","g","h","i","j","k",
+    "l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+    "1","2","3","4","5","6","7","8","9","0");
     foreach($group_options as $option)
     {
         $group_data[$option] = array(
