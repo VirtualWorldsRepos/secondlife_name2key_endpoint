@@ -31,12 +31,17 @@ if($need_sql_build == true)
     );
     while($repeat == TRUE)
     {
-        foreach($group_options as $option)
+        foreach(array_keys($group_data) as $key)
         {
-            $group_data[$option]["pairs"] = array();
-            $group_data[$option]["sql"] = "";
-            $group_data[$option]["open"] = 0;
-            $group_data[$option]["addon"] = "";
+            $new_cfg = array(
+                "pairs" => array(),
+                "sql" => "",
+                "open" => 0,
+                "next_id" => $group_data[$key]["next_id"],
+                "table" => "group_".$key."",
+                "addon" => "",
+            );
+            $group_data[$key] = $new_cfg;
         }
         $subgroup++;
         $repeat = FALSE;
@@ -120,7 +125,6 @@ if($need_sql_build == true)
                     {
                         $group_data[$key]["sql"] .= ";\n\r";
                     }
-                    $group_data[$key]["pairs"] = array();
                     echo "Group ".$key."/".$subgroup." has ".($group_data[$key]["next_id"]-1)." entrys<br/>";
                     $file = "../required/sql_dataset/".$subgroup."_group_".$key.".sql";
                     if(file_exists($file) == true)
@@ -128,8 +132,10 @@ if($need_sql_build == true)
                         unlink($file);
                     }
                     file_put_contents($file,$group_data[$key]["sql"]);
+                    // free up mem
+                    $group_data[$key]["sql"] = "";
+                    $group_data[$key]["pairs"] = array();
                 }
-                unset($group_data[$key]);
             }
         }
         else

@@ -1,6 +1,6 @@
 <?php
 $subgroups = 0;
-while($subgroups <= 20)
+while($subgroups <= 5)
 {
     output("importing datasets ".$subgroups."/20<br/>");
     $group_options[] = "other";
