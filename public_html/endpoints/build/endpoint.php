@@ -1,4 +1,11 @@
 <?php
+function output($str) {
+    echo $str;
+    ob_end_flush();
+    ob_flush();
+    flush();
+    ob_start();
+}
 if(defined("entrypoint") == true)
 {
     $all_ok = true;
