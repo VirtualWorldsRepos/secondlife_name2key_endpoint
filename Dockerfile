@@ -1,6 +1,6 @@
 FROM php:7.4-apache
 
-MAINTAINER Madpeter
+LABEL MAINTAINER="Madpeter"
 
 COPY . /srv/website
 COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf

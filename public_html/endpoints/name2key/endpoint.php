@@ -76,8 +76,7 @@ if(defined("entrypoint") == true)
             "name"=>"",
             "uuid"=>"",
             "lookingfor"=>"",
-            "message"=>"api requires you have most of a vaild name"
+            "message"=>"api requires you have most of a valid name"
         );
     }
 }
-?>
